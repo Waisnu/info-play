@@ -1,10 +1,20 @@
 // Importing the useGenres hook from '../hooks/useGenres'
-import { HStack, Image, List, ListItem, Spinner, Text } from '@chakra-ui/react';
-import { useGenres } from '../hooks/useGenres';
+import {
+    Button,
+    HStack,
+    Image,
+    List,
+    ListItem,
+    Spinner,
+} from '@chakra-ui/react';
+import { Genre, useGenres } from '../hooks/useGenres';
 import { getCroppedImageUrl } from '../services/image-url';
-
+interface Props {
+    onSelectGenre: (genre: Genre) => void;
+    selectedGenre: Genre | null;
+}
 // GenreList component displays a list of genres fetched from the API
-const GenreList = () => {
+const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
     // Calling the useGenres() hook to fetch genre data
     const { data, isLoading, error } = useGenres();
 
@@ -23,7 +33,18 @@ const GenreList = () => {
                             borderRadius={8}
                             src={getCroppedImageUrl(genre.image_background)}
                         />
-                        <Text fontSize='lg'>{genre.name}</Text>
+                        <Button
+                            fontWeight={
+                                genre.id === selectedGenre?.id
+                                    ? 'bold'
+                                    : 'normal'
+                            }
+                            onClick={() => onSelectGenre(genre)}
+                            variant='link'
+                            fontSize='lg'
+                        >
+                            {genre.name}
+                        </Button>
                     </HStack>
                 </ListItem>
             ))}
