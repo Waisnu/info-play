@@ -1,5 +1,7 @@
 // Importing the useGenres hook from '../hooks/useGenres'
+import { HStack, Image, List, ListItem, Text } from '@chakra-ui/react';
 import { useGenres } from '../hooks/useGenres';
+import { getCroppedImageUrl } from '../services/image-url';
 
 // GenreList component displays a list of genres fetched from the API
 const GenreList = () => {
@@ -8,12 +10,21 @@ const GenreList = () => {
 
     // Rendering the genre list
     return (
-        <ul>
+        <List>
             {/* Mapping through the genre data and rendering each genre */}
             {data.map((genre) => (
-                <li key={genre.id}>{genre.name}</li>
+                <ListItem key={genre.id} paddingY='5px'>
+                    <HStack>
+                        <Image
+                            boxSize='32px'
+                            borderRadius={8}
+                            src={getCroppedImageUrl(genre.image_background)}
+                        />
+                        <Text fontSize='lg'>{genre.name}</Text>
+                    </HStack>
+                </ListItem>
             ))}
-        </ul>
+        </List>
     );
 };
 // Exporting the GenreList component as default

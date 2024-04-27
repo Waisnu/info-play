@@ -9,7 +9,8 @@ type FetchResponse<F> = {
 };
 
 // Custom hook to fetch data from an API endpoint
-export const useData = <T>(endpoint: string) => {  // Generic " T "  comes from dynammic type from type Game and type Genre
+export const useData = <T>(endpoint: string) => {
+    // Generic " T "  comes from dynammic type from type Game and type Genre
     // State variables to store fetched data, error, and loading state
     const [data, setData] = useState<T[]>([]); // this could be Game[] or Genre[]
     const [error, setError] = useState(''); // Error message string
@@ -24,8 +25,8 @@ export const useData = <T>(endpoint: string) => {  // Generic " T "  comes from 
 
         // Make an API request using the provided endpoint and AbortController's signal
         apiClient
-            .get<FetchResponse<T>>(endpoint, { signal: controller.signal }) 
-            // .get<FetchResponse> is the structure, while .get<FetchResponse<T>> where it contains <T> from useData line 12.... is the type for the result: array
+            .get<FetchResponse<T>>(endpoint, { signal: controller.signal })
+            // .get<FetchResponse> is the structure, while .get<FetchResponse<T>> where it contains <T> from useData line.... is the type for the result: array
             .then((res) => {
                 // Upon successful response, update the data state with fetched results
                 setData(res.data.results);
@@ -44,7 +45,7 @@ export const useData = <T>(endpoint: string) => {  // Generic " T "  comes from 
 
         // Cleanup function to abort the fetch request when the component unmounts or when endpoint changes
         return () => controller.abort();
-    }, [endpoint]); // Dependency array with endpoint as the dependency
+    }, []); // Dependency array with endpoint as the dependency
 
     // Return an object containing fetched data, error, and loading state
     return { data, error, isLoading };
