@@ -13,7 +13,7 @@ export type GameQuery = {
     genre: Genre | null;
     platform: Platform | null;
     sortOrder: string;
-    searchText: stri
+    searchText: string
 };
 function App() {
     const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);

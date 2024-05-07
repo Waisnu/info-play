@@ -11,10 +11,19 @@ const theme = extendTheme({
     config,
     colors: {
         // Define your custom color scheme here
-        customColorScheme: {
-            light: '#F1EFE7', // Light mode color
-            dark: '#22283F', // Dark mode color
-        },
+        gray: {
+            50: '#f9f9f9',
+            100: '#ededed',
+            200: '#d3d3d3',
+            300: '#b3b3b3',
+            400: '#a0a0a0',
+            500: '#898989',
+            600: '#6c6c6c',
+            700: '#20202020',
+            800: '121212',
+            900: '#111'
+
+        }
     },
 });
 
