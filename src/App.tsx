@@ -7,11 +7,13 @@ import { useState } from 'react';
 import PlatformSelector from './components/PlatformSelector';
 import { Platform } from './hooks/useGames';
 import SortSelector from './components/SortSelector';
+import GameHeading from './components/GameHeading';
 
 export type GameQuery = {
     genre: Genre | null;
     platform: Platform | null;
     sortOrder: string;
+    searchText: stri
 };
 function App() {
     const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
@@ -41,6 +43,7 @@ function App() {
                 </GridItem>
             </Show>
             <GridItem area='main'>
+                <GameHeading gameQuery={gameQuery}/>
                 <Flex>
                     <PlatformSelector
                         selectedPlatform={gameQuery.platform}
