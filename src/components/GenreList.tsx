@@ -1,6 +1,7 @@
 // Importing the useGenres hook from '../hooks/useGenres'
 import {
     Button,
+    Heading,
     HStack,
     Image,
     List,
@@ -23,32 +24,38 @@ const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
 
     // Rendering the genre list
     return (
-        <List>
-            {/* Mapping through the genre data and rendering each genre */}
-            {data.map((genre) => (
-                <ListItem key={genre.id} paddingY='5px'>
-                    <HStack>
-                        <Image
-                            boxSize='32px'
-                            borderRadius={8}
-                            src={getCroppedImageUrl(genre.image_background)}
-                        />
-                        <Button
-                            fontWeight={
-                                genre.id === selectedGenre?.id
-                                    ? 'bold'
-                                    : 'normal'
-                            }
-                            onClick={() => onSelectGenre(genre)}
-                            variant='link'
-                            fontSize='lg'
-                        >
-                            {genre.name}
-                        </Button>
-                    </HStack>
-                </ListItem>
-            ))}
-        </List>
+        <>
+            <Heading fontSize='2xl' marginBottom={3} > Genres  </Heading>
+            <List>
+                {/* Mapping through the genre data and rendering each genre */}
+                {data.map((genre) => (
+                    <ListItem key={genre.id} paddingY='5px'>
+                        <HStack>
+                            <Image
+                                objectFit='cover'
+                                boxSize='32px'
+                                borderRadius={8}
+                                src={getCroppedImageUrl(genre.image_background)}
+                            />
+                            <Button
+                                whiteSpace='normal'
+                                textAlign='left'
+                                fontWeight={
+                                    genre.id === selectedGenre?.id
+                                        ? 'bold'
+                                        : 'normal'
+                                }
+                                onClick={() => onSelectGenre(genre)}
+                                variant='link'
+                                fontSize='lg'
+                            >
+                                {genre.name}
+                            </Button>
+                        </HStack>
+                    </ListItem>
+                ))}
+            </List>
+        </>
     );
 };
 // Exporting the GenreList component as default
