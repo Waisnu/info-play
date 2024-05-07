@@ -7,7 +7,7 @@ import { Genre } from '../hooks/useGenres';
 import { GameQuery } from '../App';
 
 interface Props {
-    gameQuery: GameQuery
+    gameQuery: GameQuery;
 }
 
 const GameGrid = ({ gameQuery }: Props) => {
@@ -16,23 +16,22 @@ const GameGrid = ({ gameQuery }: Props) => {
 
     const columns = useBreakpointValue({ base: 1, sm: 2, md: 3, lg: 4, xl: 4 });
 
+    if (error) return <Text>{error} </Text>;
+
     return (
-        <>
-            {error && <Text> {error} </Text>}
-            <SimpleGrid padding={10} columns={columns} spacing={ 6}>
-                {isLoading &&
-                    skeletons.map((skeleton) => (
-                        <GameCardContainer key={skeleton}>
-                            <GameCardSkeleton />
-                        </GameCardContainer>
-                    ))}
-                {data.map((game) => (
-                    <GameCardContainer key={game.id}>
-                        <GameCard x={game} />
+        <SimpleGrid padding={10} columns={columns} spacing={6}>
+            {isLoading &&
+                skeletons.map((skeleton) => (
+                    <GameCardContainer key={skeleton}>
+                        <GameCardSkeleton />
                     </GameCardContainer>
                 ))}
-            </SimpleGrid>
-        </>
+            {data.map((game) => (
+                <GameCardContainer key={game.id}>
+                    <GameCard x={game} />
+                </GameCardContainer>
+            ))}
+        </SimpleGrid>
     );
 };
 
